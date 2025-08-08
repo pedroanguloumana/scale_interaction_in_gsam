@@ -1,2 +1,3 @@
 *.egg-info
-/data/
+/data/raw_era5_dir/*
+/data/raw_era5_dir/*
