@@ -15,6 +15,25 @@ def load_coarse_gsam_w():
     )
     return w
 
+def load_raw_gsam_2d():
+    path = BASE_DIRECTORY + f'/raw_gsam_data/2d/daily_2d/*.nc'
+    files = sorted(glob(path))
+    data = xr.concat(
+        [xr.open_dataset(_) for _ in files],
+        dim='time'
+    )
+    return data
+
+def load_gsam_olr_on_1deg():
+    path = BASE_DIRECTORY + f'/raw_gsam_data/2d/daily_2d/*.nc'
+    files = sorted(glob(path))
+    data = xr.concat(
+        [xr.open_dataset(_)['LWNT'] for _ in files],
+        dim='time'
+    )
+    data = data.coarsen({'lat': 25, 'lon': 25}).mean()
+    return data
+
 def load_gsam_reference_profiles():
     file = BASE_DIRECTORY + '/gsam_z_p_rho_reference.nc'
     return xr.open_dataset(file)
@@ -49,9 +68,17 @@ def get_daily_combined_2d_gsam_files():
     return files
 
 def load_phase_composite_anomaly(variable, phase):
-    path = BASE_DIRECTORY + f'/phase{phase}_composite_anomaly_{variable}.nc'
+    path = BASE_DIRECTORY + f'/phase_composites/phase{phase}_composite_anomaly_{variable}.nc'
     return xr.open_dataarray(path)
 
 def load_phase_composite_mean(variable, phase):
-    path = BASE_DIRECTORY + f'/phase{phase}_composite_mean_{variable}.nc'
+    path = BASE_DIRECTORY + f'/phase_composites/phase{phase}_composite_mean_{variable}.nc'
     return xr.open_dataarray(path)
+
+def load_phase_composite(variable, phase):
+    path = BASE_DIRECTORY + f'/phase_composites/phase{phase}_composite_{variable}.nc'
+    return xr.open_dataarray(path)
+
+def load_raw_ceres_data():
+    path = BASE_DIRECTORY + f'/raw_ceres_data/northwest_tropical_pacific.CERES_SYN1deg-1H_Terra-Aqua-MODIS_Ed4.1_Subset_20200201-20200331.nc'
+    return xr.open_dataset(path)
