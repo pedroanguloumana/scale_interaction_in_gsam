@@ -7,7 +7,7 @@ import xeofs as xe
 BASE_DIRECTORY = '/Users/pedro/scale_interaction_in_gsam/data'
 
 def load_coarse_gsam_w():
-    path = BASE_DIRECTORY + '/raw_gsam_data/coarsened/*.wa_*.nc'
+    path = BASE_DIRECTORY + '/raw_gsam_data/coarsened_w/*.wa_*.nc'
     files = sorted(glob(path))
     w = xr.concat(
         [xr.open_dataarray(_) for _ in files],
@@ -44,7 +44,7 @@ def load_gsam_eofs_pcs():
     return model
 
 def load_coarse_era5_w():
-    path = BASE_DIRECTORY + '/raw_era5_data/coarsened/*_w*.nc'
+    path = BASE_DIRECTORY + '/raw_era5_data/coarsened_omega/*_w*.nc'
     files = sorted(glob(path))
     w = xr.concat(
         [xr.open_dataarray(_) for _ in files],
@@ -79,6 +79,35 @@ def load_phase_composite(variable, phase):
     path = BASE_DIRECTORY + f'/phase_composites/phase{phase}_composite_{variable}.nc'
     return xr.open_dataarray(path)
 
+def load_phase_transition_composite_anomaly(variable, phase, trans_type):
+    path = BASE_DIRECTORY + f'/phase_composites/by_trans_type/phase{phase}_{trans_type}_composite_anomaly_{variable}.nc'
+    return xr.open_dataarray(path)
+
+def load_phase_transition_composite_mean(variable, phase, trans_type):
+    path = BASE_DIRECTORY + f'/phase_composites/by_trans_type/phase{phase}_{trans_type}_composite_mean_{variable}.nc'
+    return xr.open_dataarray(path)
+
+def load_phase_transition_composite(variable, phase, trans_type):
+    path = BASE_DIRECTORY + f'/phase_composites/by_trans_type/phase{phase}_{trans_type}_composite_{variable}.nc'
+    return xr.open_dataarray(path)
+
 def load_raw_ceres_data():
     path = BASE_DIRECTORY + f'/raw_ceres_data/northwest_tropical_pacific.CERES_SYN1deg-1H_Terra-Aqua-MODIS_Ed4.1_Subset_20200201-20200331.nc'
     return xr.open_dataset(path)
+
+def load_coarse_gsam_2d():
+    path = BASE_DIRECTORY + '/raw_gsam_data/coarsened_2d/*.nc'
+    files = sorted(glob(path))
+    data = xr.concat(
+        [xr.open_dataset(_) for _ in files],
+        dim='time'
+    )
+    return data
+
+def load_imerg_data():
+    path = BASE_DIRECTORY + '/raw_imerg_data/northwest_tropical_pacific.dyamond_time.imerg.nc'
+    return xr.open_dataarray(path)
+
+def load_era5_coarse_precip():
+    path = BASE_DIRECTORY + '/raw_era5_data/coarsened_total_precip/coarsened_8.total_precip.202002.nc'
+    return xr.open_dataarray(path)
