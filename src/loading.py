@@ -111,3 +111,11 @@ def load_imerg_data():
 def load_era5_coarse_precip():
     path = BASE_DIRECTORY + '/raw_era5_data/coarsened_total_precip/coarsened_8.total_precip.202002.nc'
     return xr.open_dataarray(path)
+
+def load_era5_cloud_water_and_ice():
+    path = BASE_DIRECTORY + '/raw_era5_data/integrated_cloud_liquid_and_ice/cloud_liquid_and_ice.202002.nc'
+    return xr.open_dataset(path)
+
+def load_era5_tcwv():
+    path = BASE_DIRECTORY + '/raw_era5_data/tcwv/tropical_northwest_pacific.e5.oper.an.sfc.128_137_tcwv.ll025sc.2020020100_2020022923.nc'
+    return xr.open_dataset(path)
