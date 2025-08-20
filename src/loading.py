@@ -7,7 +7,16 @@ import xeofs as xe
 BASE_DIRECTORY = '/Users/pedro/scale_interaction_in_gsam/data'
 
 def load_coarse_gsam_w():
-    path = BASE_DIRECTORY + '/raw_gsam_data/coarsened_w/*.wa_*.nc'
+    path = BASE_DIRECTORY + '/raw_gsam_data/coarsened_wa/*.wa_*.nc'
+    files = sorted(glob(path))
+    w = xr.concat(
+        [xr.open_dataarray(_) for _ in files],
+        dim='time'
+    )
+    return w
+
+def load_coarse_std_gsam_w():
+    path = BASE_DIRECTORY + '/raw_gsam_data/coarsened_std_wa/*.wa_*.nc'
     files = sorted(glob(path))
     w = xr.concat(
         [xr.open_dataarray(_) for _ in files],
