@@ -52,6 +52,11 @@ def load_gsam_eofs_pcs():
     model = xe.single.EOF.load(file, engine='netcdf4')
     return model
 
+def load_gsam_on_era5_levels_eofs_pcs():
+    file = BASE_DIRECTORY + '/gsam_era5_levels_coarse_eofs_pcs.nc'
+    model = xe.single.EOF.load(file, engine='netcdf4')
+    return model
+
 def load_coarse_era5_w():
     path = BASE_DIRECTORY + '/raw_era5_data/coarsened_omega/*_w*.nc'
     files = sorted(glob(path))
