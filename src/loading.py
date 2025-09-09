@@ -93,17 +93,26 @@ def load_phase_composite(variable, phase):
     path = BASE_DIRECTORY + f'/phase_composites/phase{phase}_composite_{variable}.nc'
     return xr.open_dataarray(path)
 
-def load_phase_transition_composite_anomaly(variable, phase, trans_type):
-    path = BASE_DIRECTORY + f'/phase_composites/by_trans_type/phase{phase}_{trans_type}_composite_anomaly_{variable}.nc'
-    return xr.open_dataarray(path)
+def load_evolution_composite_anomaly(variable, sector, trans_type):
 
-def load_phase_transition_composite_mean(variable, phase, trans_type):
-    path = BASE_DIRECTORY + f'/phase_composites/by_trans_type/phase{phase}_{trans_type}_composite_mean_{variable}.nc'
-    return xr.open_dataarray(path)
+    path = BASE_DIRECTORY + f'/phase_composites/by_evolution/{sector}*_{trans_type}_composite_anomaly_{variable}.nc'
+    file = glob(path)
+    assert(len(file)==1)
+    return xr.open_dataarray(file[0])
 
-def load_phase_transition_composite(variable, phase, trans_type):
-    path = BASE_DIRECTORY + f'/phase_composites/by_trans_type/phase{phase}_{trans_type}_composite_{variable}.nc'
-    return xr.open_dataarray(path)
+def load_evolution_composite_mean(variable, sector, trans_type):
+
+    path = BASE_DIRECTORY + f'/phase_composites/by_evolution/{sector}_*_{trans_type}_composite_mean_{variable}.nc'
+    file = glob(path)
+    assert(len(file)==1)
+    return xr.open_dataarray(file[0])
+
+def load_evolution_composite(variable, sector, trans_type):
+
+    path = BASE_DIRECTORY + f'/phase_composites/by_evolution/{sector}_*_{trans_type}_composite_{variable}.nc'
+    file = glob(path)
+    assert(len(file)==1)
+    return xr.open_dataarray(file[0])
 
 def load_raw_ceres_data():
     path = BASE_DIRECTORY + f'/raw_ceres_data/northwest_tropical_pacific.CERES_SYN1deg-1H_Terra-Aqua-MODIS_Ed4.1_Subset_20200201-20200331.nc'
