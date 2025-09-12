@@ -1,5 +1,0 @@
-*.egg-info
-/data/raw_*
-/_archive/
-.DS_Store
-.gitignore
