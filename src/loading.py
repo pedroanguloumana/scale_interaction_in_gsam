@@ -4,7 +4,7 @@ import xarray as xr
 import xeofs as xe
 # Change below directory to desired location
 #
-BASE_DIRECTORY = './..'
+BASE_DIRECTORY = '../data'
 
 def load_coarse_gsam_w():
     path = BASE_DIRECTORY + '/raw_gsam_data/coarsened_wa/*.wa_*.nc'
