@@ -1,0 +1,11 @@
+sector,pos_delta_theta,pos_delta_radius,neg_delta_theta,neg_delta_radius
+sector4.0_weak,37,26,24,35
+sector4.0_mid,36,22,9,23
+sector4.0_strong,18,15,9,12
+sector4.5_weak,18,13,18,23
+sector4.5_mid,18,5,10,23
+sector4.5_strong,23,8,6,21
+sector5.0_weak,16,10,13,19
+sector5.0_mid,18,13,10,15
+sector5.0_strong,16,13,8,11
+ALL,200,125,107,182
