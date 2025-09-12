@@ -2,6 +2,7 @@
 from glob import glob
 import xarray as xr
 import xeofs as xe
+from os.path import isfile
 # Change below directory to desired location
 #
 BASE_DIRECTORY = '../data'
@@ -33,7 +34,12 @@ def load_raw_gsam_2d():
     )
     return data
 
-def load_gsam_olr_on_1deg():
+def load_gsam_olr_on_1deg(save_file=True):
+    out_file = BASE_DIRECTORY + '/gsam_OLR_on_1deg_grid.nc'
+    if isfile(out_file) & save_file:
+        return xr.open_dataset(out_file)
+    # If file isn't made and saved:
+    #
     path = BASE_DIRECTORY + f'/raw_gsam_data/2d/daily_2d/*.nc'
     files = sorted(glob(path))
     data = xr.concat(
@@ -41,6 +47,8 @@ def load_gsam_olr_on_1deg():
         dim='time'
     )
     data = data.coarsen({'lat': 25, 'lon': 25}).mean()
+    if save_file:
+        data.to_netcdf(out_file)
     return data
 
 def load_gsam_reference_profiles():
@@ -115,7 +123,7 @@ def load_evolution_composite(variable, sector, trans_type):
     return xr.open_dataarray(file[0])
 
 def load_raw_ceres_data():
-    path = BASE_DIRECTORY + f'/raw_ceres_data/northwest_tropical_pacific.CERES_SYN1deg-1H_Terra-Aqua-MODIS_Ed4.1_Subset_20200201-20200331.nc'
+    path = BASE_DIRECTORY + f'/northwest_tropical_pacific.CERES_SYN1deg-1H_Terra-Aqua-MODIS_Ed4.1_Subset_20200201-20200331.nc'
     return xr.open_dataset(path)
 
 def load_coarse_gsam_2d():
