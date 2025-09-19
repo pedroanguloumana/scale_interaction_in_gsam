@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as follows."
+title: "Code and data for: Multiscale Convective Circulations and Scale Interactions in a Global Storm-Resolving Model"
+authors:
+  - family-names: Angulo-Umana
+    given-names: Pedro
+    orcid: "https://orcid.org/0000-0002-1383-0930"
+  - family-names: Kim
+    given-names: Daehyun
+    orcid: "https://orcid.org/0000-0001-9233-2747"
+  - family-names: Blossey
+    given-names: Peter
+    orcid: "https://orcid.org/0000-0002-0352-0840"
+version: "1.0.1"
+doi: "10.5281/zenodo.9876543"
+date-released: 2025-09-19
+repository-code: "https://github.com/pedroanguloumana/scale_interaction_in_gsam/"
+license: "BSD-3-Clause"
+keywords:
+  - tropical convection
+  - numerical modeling 
+  - scale interactions
